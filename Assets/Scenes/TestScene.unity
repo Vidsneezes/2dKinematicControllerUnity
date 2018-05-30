@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 128517567}
   - component: {fileID: 128517570}
   - component: {fileID: 128517569}
+  - component: {fileID: 128517571}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -158,7 +159,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 128517566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.671404, y: 10.39, z: -10.089844}
+  m_LocalPosition: {x: 26.671404, y: 10.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -234,6 +235,32 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &128517571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 128517566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c6470ccb9b3cb340b08f6238e2bcf49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRightPressed: 0
+  isLeftPressed: 0
+  wasJumpPressed: 0
+  moveSpeed: 10
+  gravity: 64
+  startJumpSpeed: 24
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  hitBox: {fileID: 0}
+  mainSprite: {fileID: 0}
+  onGround: 0
+  velocity: {x: 0, y: 0}
+  rBody2d: {fileID: 0}
+  playerSpawnPoint: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +347,7 @@ GameObject:
   - component: {fileID: 1403242687}
   - component: {fileID: 1403242686}
   - component: {fileID: 1403242685}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CollisionMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,9 @@ public class PlayerController : MonoBehaviour {
     public float gravity;
     public float startJumpSpeed;
     public LayerMask groundMask;
+    [HideInInspector]
     public BoxCollider2D hitBox;
+    [HideInInspector]
     public SpriteRenderer mainSprite;
     public bool onGround;
 
@@ -28,6 +30,8 @@ public class PlayerController : MonoBehaviour {
     private void Awake()
     {
         rBody2d = GetComponent<Rigidbody2D>();
+        mainSprite = GetComponent<SpriteRenderer>();
+        hitBox = GetComponent<BoxCollider2D>();
     }
 
     // Use this for initialization
