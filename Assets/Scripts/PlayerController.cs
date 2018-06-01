@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour {
             Vector2 topRight = currentPosition;
             topRight.x += hitBox.size.x * 0.5f + final_hor_vel * Time.deltaTime;
             topRight.y += hitBox.size.y;
-            RaycastHit2D pointIntersection = Physics2D.Raycast(topRight, Vector2.down, hitBox.size.y * 1.3f, groundMask);
+            RaycastHit2D pointIntersection = Physics2D.Raycast(topRight, Vector2.down, hitBox.size.y * 2f, groundMask);
             bool isSlope = false;
             if (pointIntersection.collider != null)
             {
@@ -102,6 +102,11 @@ public class PlayerController : MonoBehaviour {
                     currentPosition.y = pointIntersection.point.y;
                     isSlope = true;
                     final_hor_vel = 0;
+                }
+                if(angle < 1)
+                {
+                    currentPosition.x = pointIntersection.point.x - (hitBox.size.x * 0.5f);
+                    currentPosition.y = pointIntersection.point.y;
                 }
             }
 
