@@ -82,33 +82,27 @@ public class PlayerController : MonoBehaviour {
         //horizontal check
         velocity.x = direction.x * actualMoveSpeed;
         float final_hor_vel = velocity.x;
+   
 
         if (PlaceMeet(currentPosition.x + final_hor_vel * Time.deltaTime, currentPosition.y, groundMask))
         {
+            Vector2 topRight = currentPosition;
+            topRight.x += hitBox.size.x * 0.5f + final_hor_vel * Time.deltaTime;
+            topRight.y += hitBox.size.y;
+            RaycastHit2D pointIntersection = Physics2D.Raycast(topRight, Vector2.down, hitBox.size.y * 1.3f, groundMask);
             bool isSlope = false;
-            RaycastHit2D raycaster = Physics2D.Raycast(currentPosition + Vector2.up * (1f / 8f), Vector2.right * Mathf.Sign(final_hor_vel), final_hor_vel, groundMask);
-            if (raycaster.collider != null)
+            if (pointIntersection.collider != null)
             {
-                float anglePoint = Vector2.Angle(Vector2.up, raycaster.normal);
-                if (anglePoint > 29.88888f)
+                float angle = Vector2.Angle(Vector2.up, pointIntersection.normal);
+                currentPosition.y = pointIntersection.point.y;
+                Debug.Log(angle);
+                if(angle > 44.8888f && angle < 89.8999f)
                 {
+                    currentPosition.x = pointIntersection.point.x - (hitBox.size.x * 0.5f);
+                    currentPosition.y = pointIntersection.point.y;
                     isSlope = true;
-                    Collider2D overlappedPoint = Physics2D.OverlapPoint(currentPosition + Vector2.right * final_hor_vel * Time.deltaTime + Vector2.right * hitBox.size.x * 0.5f, groundMask);
-                    if (overlappedPoint != null)
-                    {
-                        Vector2 topRight = currentPosition;
-                        topRight.x += hitBox.size.x * 0.5f;
-                        topRight.y += hitBox.size.y;
-                        RaycastHit2D pointIntersection = Physics2D.Raycast(topRight, Vector2.down, hitBox.size.x * 1.3f, groundMask);
-                        isSlope = true;
-                        if (pointIntersection.collider != null)
-                        {
-                            currentPosition.y = pointIntersection.point.y;
-                        }
-                        Debug.Log("got slope point intersection");
-                    }
+                    final_hor_vel = 0;
                 }
-                Debug.Log(anglePoint);
             }
 
             if (!isSlope)
